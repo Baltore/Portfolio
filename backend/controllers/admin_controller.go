@@ -89,8 +89,11 @@ func DeleteEducation(c *gin.Context) {
 // CRUD pour l'Experience
 func GetExperiences(c *gin.Context) {
 	var experiences []models.Experience
-	config.DB.Find(&experiences)
-	c.JSON(http.StatusOK, gin.H{"experiences": experiences})
+	if err := config.DB.Find(&experiences).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, experiences)
 }
 
 func UpdateExperience(c *gin.Context) {

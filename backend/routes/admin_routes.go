@@ -26,7 +26,7 @@ func AdminRoutes(router *gin.Engine) {
 		adminGroup.DELETE("/education/:id", controllers.DeleteEducation)
 
 		// Routes pour les expériences
-		adminGroup.GET("/experience", controllers.GetExperiences)
+		adminGroup.GET("/experiences", controllers.GetExperiences)
 		adminGroup.PUT("/experience/:id", controllers.UpdateExperience)
 		adminGroup.DELETE("/experience/:id", controllers.DeleteExperience)
 
