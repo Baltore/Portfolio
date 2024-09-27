@@ -7,6 +7,7 @@ type Projet struct {
 	Technologie string
 	StartDate   string
 	EndDate     string
+	Lien        string
 }
 
 func (Projet) TableName() string {

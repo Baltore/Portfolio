@@ -11,9 +11,9 @@ func AdminRoutes(router *gin.Engine) {
 	{
 
 		// Routes pour les projets
-		adminGroup.GET("/project", controllers.GetProjects)
-		adminGroup.PUT("/project/:id", controllers.UpdateProject)
-		adminGroup.DELETE("/project/:id", controllers.DeleteProject)
+		adminGroup.GET("/projets", controllers.GetProjets)
+		adminGroup.PUT("/projet/:id", controllers.UpdateProjet)
+		adminGroup.DELETE("/projet/:id", controllers.DeleteProjet)
 
 		// Routes pour les Contacts
 		adminGroup.GET("/contacts", controllers.GetContacts)
@@ -21,7 +21,7 @@ func AdminRoutes(router *gin.Engine) {
 		adminGroup.DELETE("/contact/:id", controllers.DeleteContact)
 
 		// Routes pour l'éducation
-		adminGroup.GET("/education", controllers.GetEducations)
+		adminGroup.GET("/educations", controllers.GetEducations)
 		adminGroup.PUT("/education/:id", controllers.UpdateEducation)
 		adminGroup.DELETE("/education/:id", controllers.DeleteEducation)
 

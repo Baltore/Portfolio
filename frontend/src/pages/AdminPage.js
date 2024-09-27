@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getEducation, getProjects, getExperiences, getSkills, getContacts, updateEducation, updateProject, updateExperience, updateSkill, updateContact } from '../services/api'; // Import des services
+import { getEducations, getProjets, getExperiences, getSkills, getContacts, updateEducation, updateProjet, updateExperience, updateSkill, updateContact } from '../services/api'; // Import des services
 
 const AdminPage = () => {
   const [educationData, setEducationData] = useState([]);
-  const [projectsData, setProjectsData] = useState([]);
+  const [projetsData, setProjetsData] = useState([]);
   const [experienceData, setExperienceData] = useState([]);
   const [skillsData, setSkillsData] = useState([]);
   const [contactsData, setContactsData] = useState([]);
@@ -13,14 +13,14 @@ const AdminPage = () => {
     // Charger les données dès le chargement de la page
     const fetchData = async () => {
       try {
-        const educationResponse = await getEducation();
-        const projectsResponse = await getProjects();
+        const educationResponse = await getEducations();
+        const projetsResponse = await getProjets();
         const experienceResponse = await getExperiences();
         const skillsResponse = await getSkills();
         const contactsResponse = await getContacts();
 
         setEducationData(educationResponse.data);
-        setProjectsData(projectsResponse.data);
+        setProjetsData(projetsResponse.data);
         setExperienceData(experienceResponse.data);
         setSkillsData(skillsResponse.data);
         setContactsData(contactsResponse.data);
@@ -40,9 +40,9 @@ const AdminPage = () => {
           await updateEducation(updatedData.id, updatedData);
           setEducationData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
           break;
-        case 'project':
-          await updateProject(updatedData.id, updatedData);
-          setProjectsData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
+        case 'projet':
+          await updateProjet(updatedData.id, updatedData);
+          setProjetsData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
           break;
         case 'experience':
           await updateExperience(updatedData.id, updatedData);
@@ -90,19 +90,19 @@ const AdminPage = () => {
 
       <section>
         <h2>Projets</h2>
-        {projectsData.map((project) => (
-          <div key={project.id}>
-            {editData?.id === project.id ? (
+        {projetsData.map((projet) => (
+          <div key={projet.id}>
+            {editData?.id === projet.id ? (
               <input
                 type="text"
                 value={editData.name}
                 onChange={(e) => setEditData({ ...editData, name: e.target.value })}
               />
             ) : (
-              <p>{project.name}</p>
+              <p>{projet.name}</p>
             )}
-            <button onClick={() => setEditData(project)}>Modifier</button>
-            {editData?.id === project.id && <button onClick={() => handleSave('project', editData)}>Enregistrer</button>}
+            <button onClick={() => setEditData(projet)}>Modifier</button>
+            {editData?.id === projet.id && <button onClick={() => handleSave('projet', editData)}>Enregistrer</button>}
           </div>
         ))}
       </section>

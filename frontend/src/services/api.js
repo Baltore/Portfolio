@@ -6,16 +6,16 @@ const api = axios.create({
 });
 
 // Gestion des requêtes pour la section Éducation
-export const getEducation = () => api.get('/admin/educations');
+export const getEducations = () => api.get('/admin/educations');
 export const addEducation = (data) => api.post('/admin/educations', data);
 export const updateEducation = (id, data) => api.put(`/admin/educations/${id}`, data);
 export const deleteEducation = (id) => api.delete(`/admin/educations/${id}`);
 
 // Gestion des requêtes pour la section Projet
-export const getProjects = () => api.get('/admin/projects');
-export const addProject = (data) => api.post('/admin/projects', data);
-export const updateProject = (id, data) => api.put(`/admin/projects/${id}`, data);
-export const deleteProject = (id) => api.delete(`/admin/projects/${id}`);
+export const getProjets = () => api.get('/admin/projets');
+export const addProjet = (data) => api.post('/admin/projets', data);
+export const updateProjet = (id, data) => api.put(`/admin/projets/${id}`, data);
+export const deleteProjet = (id) => api.delete(`/admin/projets/${id}`);
 
 // Gestion des requêtes pour la section Expérience
 export const getExperiences = () => api.get('/admin/experiences');
