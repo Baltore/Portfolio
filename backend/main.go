@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"project/config"
 	"project/routes"
 
@@ -10,8 +11,13 @@ import (
 func main() {
 	router := gin.Default()
 
+	// Endpoint de test
+	router.GET("/test", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "Server is running!"})
+	})
+
 	// Connexion à la base de données
-	config.ConnectDatabase()
+	config.Connect()
 
 	// Définir les routes d'administration
 	routes.AdminRoutes(router)

@@ -9,14 +9,18 @@ import (
 func AdminRoutes(router *gin.Engine) {
 	adminGroup := router.Group("/admin")
 	{
-		// Route pour l'authentification
-		adminGroup.POST("/login", controllers.Login)
 
 		// Routes pour les projets
 		adminGroup.GET("/projects", controllers.GetProjects)
 		adminGroup.POST("/projects", controllers.CreateProject)
 		adminGroup.PUT("/projects/:id", controllers.UpdateProject)
 		adminGroup.DELETE("/projects/:id", controllers.DeleteProject)
+
+		// Routes pour les Contacts
+		adminGroup.GET("/contacts", controllers.GetContacts)
+		adminGroup.POST("/contacts", controllers.CreateContact)
+		adminGroup.PUT("/contacts/:id", controllers.UpdateContact)
+		adminGroup.DELETE("/contacts/:id", controllers.DeleteContact)
 
 		// Routes pour l'éducation
 		adminGroup.GET("/educations", controllers.GetEducations)
@@ -35,5 +39,8 @@ func AdminRoutes(router *gin.Engine) {
 		adminGroup.POST("/skills", controllers.CreateSkill)
 		adminGroup.PUT("/skills/:id", controllers.UpdateSkill)
 		adminGroup.DELETE("/skills/:id", controllers.DeleteSkill)
+
+		// Route pour obtenir les informations d'une personne
+		adminGroup.GET("/person", controllers.GetPerson)
 	}
 }

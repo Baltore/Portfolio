@@ -1,0 +1,63 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #333;
+    padding: 10px 0;
+  }
+  
+  header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  header nav ul li {
+    margin: 0 20px;
+  }
+  
+  header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  header nav ul li a:hover {
+    color: #ddd;
+  }
+  
+  main {
+    text-align: center;
+    margin: 50px 0;
+  }
+  
+  .hero {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 3em;
+    color: #333;
+  }
+  
+  .hero p {
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  

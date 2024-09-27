@@ -5,3 +5,7 @@ type Admin struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required" gorm:"unique"`
 }
+
+func (Admin) TableName() string {
+	return "admins"
+}

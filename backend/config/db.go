@@ -1,7 +1,6 @@
 package config
 
 import (
-	"log"
 	"project/models"
 
 	"gorm.io/driver/sqlite"
@@ -10,26 +9,22 @@ import (
 
 var DB *gorm.DB
 
-func ConnectDatabase() {
-	// Connexion à la base de données SQLite
+func Connect() {
 	database, err := gorm.Open(sqlite.Open("bdd.db"), &gorm.Config{})
 	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
+		panic("Failed to connect to the database!")
 	}
+	DB = database
 
-	// Migration des tables pour synchroniser les modèles avec la base de données
-	err = database.AutoMigrate(
-		&models.Admin{},
+	// Ajoute l'appel à AutoMigrate ici
+	err = DB.AutoMigrate(
 		&models.Contact{},
 		&models.Education{},
 		&models.Experience{},
 		&models.Projet{},
 		&models.Skill{},
 	)
-
 	if err != nil {
-		log.Fatal("Failed to migrate database:", err)
+		panic("Failed to migrate database!")
 	}
-
-	DB = database
 }

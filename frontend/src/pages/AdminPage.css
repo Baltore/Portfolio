@@ -1,0 +1,46 @@
+.admin {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .admin h1 {
+    text-align: center;
+  }
+  
+  .admin-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .admin-item input,
+  .admin-item textarea {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .admin-item button {
+    margin: 5px 5px 0 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .admin-item button:hover {
+    background-color: #0056b3;
+  }
+  
+  .admin-item button:last-of-type {
+    background-color: #dc3545;
+  }
+  
+  .admin-item button:last-of-type:hover {
+    background-color: #c82333;
+  }

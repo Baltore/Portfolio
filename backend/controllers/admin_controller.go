@@ -6,34 +6,16 @@ import (
 	"project/models"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
-// Fonction pour l'authentification de l'admin
-func Login(c *gin.Context) {
-	var input struct {
-		Username string `json:"username" binding:"required"`
-		Password string `json:"password" binding:"required"`
-	}
-
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// GetPerson retourne les informations d'une personne
+func GetPerson(c *gin.Context) {
+	var person models.Person // Assure-toi d'avoir un modèle pour la personne
+	if err := config.DB.First(&person).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Person not found"})
 		return
 	}
-
-	var admin models.Admin
-	if err := config.DB.Where("username = ?", input.Username).First(&admin).Error; err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
-		return
-	}
-
-	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid username or password"})
-		return
-	}
-
-	// Si l'authentification est réussie
-	c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
+	c.JSON(http.StatusOK, person)
 }
 
 // CRUD pour les Projets
@@ -214,4 +196,74 @@ func DeleteSkill(c *gin.Context) {
 
 	config.DB.Delete(&skill)
 	c.JSON(http.StatusOK, gin.H{"message": "Skill deleted successfully"})
+}
+
+// GetContacts retourne la liste des contacts
+func GetContacts(c *gin.Context) {
+	var contacts []models.Contact
+	if err := config.DB.Find(&contacts).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, contacts)
+}
+
+// CreateContact ajoute un nouveau contact
+func CreateContact(c *gin.Context) {
+	var contact models.Contact
+	if err := c.ShouldBindJSON(&contact); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	// Ajout du contact à la base de données
+	if err := config.DB.Create(&contact).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create contact"})
+		return
+	}
+	c.JSON(http.StatusCreated, contact)
+}
+
+// UpdateContact modifie un contact existant
+func UpdateContact(c *gin.Context) {
+	id := c.Param("id")
+	var contact models.Contact
+
+	// Vérifie si le contact existe
+	if err := config.DB.Where("id = ?", id).First(&contact).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Contact not found"})
+		return
+	}
+
+	if err := c.ShouldBindJSON(&contact); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Met à jour le contact dans la base de données
+	if err := config.DB.Save(&contact).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to update contact"})
+		return
+	}
+
+	c.JSON(http.StatusOK, contact)
+}
+
+// DeleteContact supprime un contact
+func DeleteContact(c *gin.Context) {
+	id := c.Param("id")
+	var contact models.Contact
+
+	// Vérifie si le contact existe
+	if err := config.DB.Where("id = ?", id).First(&contact).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Contact not found"})
+		return
+	}
+
+	// Supprime le contact de la base de données
+	if err := config.DB.Delete(&contact).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to delete contact"})
+		return
+	}
+
+	c.JSON(http.StatusNoContent, nil)
 }
