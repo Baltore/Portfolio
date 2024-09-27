@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Education from './pages/Education';
-import Project from './pages/Project';
+import Projet from './pages/Projet';
 import Experience from './pages/Experience';
 import Contact from './pages/Contact';
 import AdminPage from './pages/AdminPage';
@@ -14,7 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/education" element={<Education />} />
-        <Route path="/projects" element={<Project />} />
+        <Route path="/projets" element={<Projet />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/skill" element={<Skill />} />

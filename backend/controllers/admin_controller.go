@@ -19,16 +19,19 @@ func GetPerson(c *gin.Context) {
 }
 
 // CRUD pour les Projets
-func GetProjects(c *gin.Context) {
+func GetProjets(c *gin.Context) {
 	var projets []models.Projet
-	config.DB.Find(&projets)
-	c.JSON(http.StatusOK, gin.H{"projects": projets})
+	if err := config.DB.Find(&projets).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, projets)
 }
 
-func UpdateProject(c *gin.Context) {
+func UpdateProjet(c *gin.Context) {
 	var projet models.Projet
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
 		return
 	}
 
@@ -41,7 +44,7 @@ func UpdateProject(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Project updated successfully"})
 }
 
-func DeleteProject(c *gin.Context) {
+func DeleteProjet(c *gin.Context) {
 	var projet models.Projet
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
@@ -55,8 +58,11 @@ func DeleteProject(c *gin.Context) {
 // CRUD pour l'Education
 func GetEducations(c *gin.Context) {
 	var educations []models.Education
-	config.DB.Find(&educations)
-	c.JSON(http.StatusOK, gin.H{"educations": educations})
+	if err := config.DB.Find(&educations).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, educations)
 }
 
 func UpdateEducation(c *gin.Context) {
@@ -89,8 +95,11 @@ func DeleteEducation(c *gin.Context) {
 // CRUD pour l'Experience
 func GetExperiences(c *gin.Context) {
 	var experiences []models.Experience
-	config.DB.Find(&experiences)
-	c.JSON(http.StatusOK, gin.H{"experiences": experiences})
+	if err := config.DB.Find(&experiences).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, experiences)
 }
 
 func UpdateExperience(c *gin.Context) {
@@ -123,8 +132,11 @@ func DeleteExperience(c *gin.Context) {
 // CRUD pour les Skills
 func GetSkills(c *gin.Context) {
 	var skills []models.Skill
-	config.DB.Find(&skills)
-	c.JSON(http.StatusOK, gin.H{"skills": skills})
+	if err := config.DB.Find(&skills).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, skills)
 }
 
 func UpdateSkill(c *gin.Context) {

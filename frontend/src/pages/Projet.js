@@ -12,7 +12,7 @@ const Projet = () => {
         const response = await axios.get('http://localhost:8080/admin/projets');
         setProjets(response.data);
       } catch (error) {
-        console.error("Error fetching project data:", error);
+        console.error("Error fetching projet data:", error);
         setError("Impossible de récupérer les données des projets."); // Message d'erreur
       }
     };
@@ -25,15 +25,17 @@ const Projet = () => {
       <h1>Projets</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        {projets.map(projet => (
-          <li key={projet.ID}>
-            <h2>{projet.Name}</h2>
-            <p>Description: {projet.Description}</p>
-            <p>Tecnologie: {projet.Technologie}</p>
-            <p>Période: {projet.StartDate} à {projet.EndDate}</p>
-          </li>
-        ))}
-      </ul>
+      {projets.map(projet => (
+        <li key={projet.ID}>
+          <h2>{projet.Name}</h2>
+          <p>Description: {projet.Description}</p>
+          <p>Tecnologie: {projet.Technologie}</p>
+          <p>Démarrage: {projet.StartDate}</p>
+          <p>Fin: {projet.EndDate}</p>
+          <p>Lien: <a href={projet.Lien} target="_blank" rel="noopener noreferrer">{projet.Lien}</a></p>
+        </li>
+      ))}
+    </ul>
     </div>
   );
 };
