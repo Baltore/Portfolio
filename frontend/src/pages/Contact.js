@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Contact.css'; 
 
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
@@ -22,17 +24,34 @@ const Contact = () => {
 
   return (
     <div>
-      <h1>Contacts</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <header className="header">
+        <nav>
+          <ul>
+            <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/education">Education</Link></li>
+            <li><Link to="/projets">Projet</Link></li>
+            <li><Link to="/experience">Expérience</Link></li>
+            <li><Link to="/skill">Skills</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <body>
+      <h1>Liste des Contacts</h1>
+      <section className="contact-container">
         {contacts.map(contact => (
-          <li key={contact.ID}>
-            <h2>{contact.Prenom} {contact.Nom}</h2> 
-            <p>Email: {contact.Email}</p>
-            <p>Téléphone: {contact.Telephone}</p>
-          </li>
+        <form key={contact.ID} className="contact-item">
+            <label for="numero">{contact.ID}</label>
+            <label for="nom">Nom : {contact.Nom}</label>
+            <label for="prenom">Prenom : {contact.Prenom}</label>
+            <label for="email">Email : {contact.Email}</label>
+            <label for="phone">Téléphone : {contact.Telephone}</label>
+        </form>
         ))}
-      </ul>
+      </section>
+      </body>
+
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };

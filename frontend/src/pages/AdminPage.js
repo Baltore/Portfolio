@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getEducations, getProjets, getExperiences, getSkills, getContacts, updateEducation, updateProjet, updateExperience, updateSkill, updateContact } from '../services/api'; // Import des services
+import { Link } from 'react-router-dom';
 
 const AdminPage = () => {
   const [educationData, setEducationData] = useState([]);
@@ -67,6 +68,18 @@ const AdminPage = () => {
 
   return (
     <div>
+      <header className="header">
+        <nav>
+          <ul>
+            <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/education">Education</Link></li>
+            <li><Link to="/projets">Projet</Link></li>
+            <li><Link to="/experience">Expérience</Link></li>
+            <li><Link to="/skill">Skills</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <body>
       <h1>Page d'Administration</h1>
 
       <section>
@@ -163,6 +176,7 @@ const AdminPage = () => {
           </div>
         ))}
       </section>
+      </body>
     </div>
   );
 };

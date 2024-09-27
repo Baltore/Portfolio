@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Projet = () => {
   const [projets, setProjets] = useState([]);
@@ -22,6 +23,18 @@ const Projet = () => {
 
   return (
     <div>
+      <header className="header">
+        <nav>
+          <ul>
+            <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/education">Education</Link></li>
+            <li><Link to="/experience">Expérience</Link></li>
+            <li><Link to="/skill">Skills</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
+          </ul>
+        </nav>
+      </header>
+      <body>
       <h1>Projets</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
@@ -36,6 +49,7 @@ const Projet = () => {
         </li>
       ))}
     </ul>
+    </body>
     </div>
   );
 };

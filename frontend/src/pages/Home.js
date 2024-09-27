@@ -1,12 +1,11 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css'; // Pour le style personnalisé
+import './Home.css'; 
 
 const Home = () => {
   return (
-    <div className="home">
-      <header>
+    <div>
+      <header className="header">
         <nav>
           <ul>
             <li><Link to="/education">Education</Link></li>
@@ -17,18 +16,10 @@ const Home = () => {
             <li><Link to="/admin">Admin</Link></li>
           </ul>
         </nav>
+        <hr />
       </header>
-
-      <main>
-        <section className="hero">
-          <h1>Bienvenue sur mon Portfolio</h1>
-          <p>Découvrez mon parcours, mes projets, mes compétences et plus encore.</p>
-        </section>
-      </main>
-
-      <footer>
-        <p>&copy; 2024 Mon Portfolio</p>
-      </footer>
+      <h1>Portfolio Immersion 3 jours</h1>
+      <h3>Welcome to this portfolio where you can see the level of the project, experiences, the school route and to contact</h3>
     </div>
   );
 };

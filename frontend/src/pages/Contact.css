@@ -1,0 +1,47 @@
+/* Home.css */
+body {
+    background: none;
+}
+
+
+/* Style du container des contacts */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px; /* Aligner à gauche avec un décalage */
+    padding: 10px;
+    border: 1px solid #000; /* Bordure noire autour du container */
+    max-width: 250px;
+    max-height: 500px;
+  }
+  
+  /* Style pour chaque bloc de contact */
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 15px;
+    border: 1px solid #000; /* Bordure noire autour de chaque contact */
+    border-radius: 45px;
+    background-color: #f8f9fa;
+  }
+  
+  /* Style des labels pour aligner les informations */
+  .contact-item label {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  /* Style des messages d'erreur */
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
