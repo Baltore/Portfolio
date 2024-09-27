@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Contacts</title>
+    <link rel="stylesheet" href="/PageCss/Contact.css">
+</head>
+<body>
+
+    <main>
+    <!-- Composant de Liste des Contacts -->
+    <section class="contact-list">
+        <h2>Liste des Contacts</h2>
+        <ul>
+            <li>Contact 1 <button>Modifier</button> <button>Supprimer</button></li>
+            <li>Contact 2 <button>Modifier</button> <button>Supprimer</button></li>
+            <li>Contact 3 <button>Modifier</button> <button>Supprimer</button></li>
+        </ul>
+    </section>
+
+    
+    <section class="contact-details">
+        <h2>Détails du Contact</h2>
+        <p>Nom: </p>
+        <p>Email: </p>
+        <p>Téléphone: </p>
+    </section>
+
+
+    <section class="contact-form">
+        <h2>Ajouter/Modifier un Contact</h2>
+        <form>
+            <label for="name">Nom :</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Téléphone :</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <button type="submit">Enregistrer</button>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>
