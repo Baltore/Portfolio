@@ -2,29 +2,35 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Projet = () => {
-  const [projects, setProjects] = useState([]);
+  const [projets, setProjets] = useState([]);
+  const [error, setError] = useState(null); // État pour stocker les messages d'erreur
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchProjets = async () => {
       try {
-        const response = await axios.get('/admin/projects'); // Change l'URL si nécessaire
-        setProjects(response.data.projects);
+        // Utiliser l'URL complète
+        const response = await axios.get('http://localhost:8080/admin/projets');
+        setProjets(response.data);
       } catch (error) {
         console.error("Error fetching project data:", error);
+        setError("Impossible de récupérer les données des projets."); // Message d'erreur
       }
     };
 
-    fetchProjects();
+    fetchProjets();
   }, []);
 
   return (
     <div>
       <h1>Projets</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
-        {projects.map(project => (
-          <li key={project.id}>
-            <h2>{project.name}</h2>
-            <p>{project.description}</p>
+        {projets.map(projet => (
+          <li key={projet.ID}>
+            <h2>{projet.Name}</h2>
+            <p>Description: {projet.Description}</p>
+            <p>Tecnologie: {projet.Technologie}</p>
+            <p>Période: {projet.StartDate} à {projet.EndDate}</p>
           </li>
         ))}
       </ul>

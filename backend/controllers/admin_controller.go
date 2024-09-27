@@ -25,17 +25,6 @@ func GetProjects(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"projects": projets})
 }
 
-func CreateProject(c *gin.Context) {
-	var projet models.Projet
-	if err := c.ShouldBindJSON(&projet); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	config.DB.Create(&projet)
-	c.JSON(http.StatusOK, gin.H{"message": "Project created successfully", "project": projet})
-}
-
 func UpdateProject(c *gin.Context) {
 	var projet models.Projet
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
@@ -68,17 +57,6 @@ func GetEducations(c *gin.Context) {
 	var educations []models.Education
 	config.DB.Find(&educations)
 	c.JSON(http.StatusOK, gin.H{"educations": educations})
-}
-
-func CreateEducation(c *gin.Context) {
-	var education models.Education
-	if err := c.ShouldBindJSON(&education); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	config.DB.Create(&education)
-	c.JSON(http.StatusOK, gin.H{"message": "Education created successfully", "education": education})
 }
 
 func UpdateEducation(c *gin.Context) {
@@ -115,17 +93,6 @@ func GetExperiences(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"experiences": experiences})
 }
 
-func CreateExperience(c *gin.Context) {
-	var experience models.Experience
-	if err := c.ShouldBindJSON(&experience); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	config.DB.Create(&experience)
-	c.JSON(http.StatusOK, gin.H{"message": "Experience created successfully", "experience": experience})
-}
-
 func UpdateExperience(c *gin.Context) {
 	var experience models.Experience
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&experience).Error; err != nil {
@@ -158,17 +125,6 @@ func GetSkills(c *gin.Context) {
 	var skills []models.Skill
 	config.DB.Find(&skills)
 	c.JSON(http.StatusOK, gin.H{"skills": skills})
-}
-
-func CreateSkill(c *gin.Context) {
-	var skill models.Skill
-	if err := c.ShouldBindJSON(&skill); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	config.DB.Create(&skill)
-	c.JSON(http.StatusOK, gin.H{"message": "Skill created successfully", "skill": skill})
 }
 
 func UpdateSkill(c *gin.Context) {
@@ -206,21 +162,6 @@ func GetContacts(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, contacts)
-}
-
-// CreateContact ajoute un nouveau contact
-func CreateContact(c *gin.Context) {
-	var contact models.Contact
-	if err := c.ShouldBindJSON(&contact); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	// Ajout du contact à la base de données
-	if err := config.DB.Create(&contact).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create contact"})
-		return
-	}
-	c.JSON(http.StatusCreated, contact)
 }
 
 // UpdateContact modifie un contact existant

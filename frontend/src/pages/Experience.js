@@ -3,14 +3,17 @@ import axios from 'axios';
 
 const Experience = () => {
   const [experiences, setExperiences] = useState([]);
+  const [error, setError] = useState(null); // État pour stocker les messages d'erreur
 
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
-        const response = await axios.get('/admin/experiences'); // Change l'URL si nécessaire
-        setExperiences(response.data.experiences);
+        // Utiliser l'URL complète
+        const response = await axios.get('http://localhost:8080/admin/experiences');
+        setExperiences(response.data);
       } catch (error) {
         console.error("Error fetching experience data:", error);
+        setError("Impossible de récupérer les données d'expérience."); // Message d'erreur
       }
     };
 
@@ -20,12 +23,13 @@ const Experience = () => {
   return (
     <div>
       <h1>Expérience</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <ul>
         {experiences.map(experience => (
-          <li key={experience.id}>
-            <h2>{experience.title}</h2>
-            <p>{experience.company}</p>
-            <p>{experience.year}</p>
+          <li key={experience.ID}>
+            <h2>{experience.WorkName}</h2> 
+            <p>Description: {experience.Description}</p>
+            <p>Période: {experience.StartDate} à {experience.EndDate}</p>
           </li>
         ))}
       </ul>
