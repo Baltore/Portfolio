@@ -18,6 +18,43 @@ func GetPerson(c *gin.Context) {
 	c.JSON(http.StatusOK, person)
 }
 
+// CRUD pour les Aboutme
+func GetAboutMe(c *gin.Context) {
+	var aboutme []models.AboutMe
+	if err := config.DB.Find(&aboutme).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, aboutme)
+}
+
+func UpdateAboutMe(c *gin.Context) {
+	var aboutme models.AboutMe
+	if err := config.DB.Where("id = ?", c.Param("id")).First(&aboutme).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "AboutMe not found"})
+		return
+	}
+
+	if err := c.ShouldBindJSON(&aboutme); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	config.DB.Save(&aboutme)
+	c.JSON(http.StatusOK, gin.H{"message": "AboutMe updated successfully"})
+}
+
+func DeleteAboutMe(c *gin.Context) {
+	var aboutme models.AboutMe
+	if err := config.DB.Where("id = ?", c.Param("id")).First(&aboutme).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "AboutMe not found"})
+		return
+	}
+
+	config.DB.Delete(&aboutme)
+	c.JSON(http.StatusOK, gin.H{"message": "AboutMe deleted successfully"})
+}
+
 // CRUD pour les Projets
 func GetProjets(c *gin.Context) {
 	var projets []models.Projet
@@ -41,18 +78,18 @@ func UpdateProjet(c *gin.Context) {
 	}
 
 	config.DB.Save(&projet)
-	c.JSON(http.StatusOK, gin.H{"message": "Project updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "Projet updated successfully"})
 }
 
 func DeleteProjet(c *gin.Context) {
 	var projet models.Projet
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
 		return
 	}
 
 	config.DB.Delete(&projet)
-	c.JSON(http.StatusOK, gin.H{"message": "Project deleted successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "Projet deleted successfully"})
 }
 
 // CRUD pour l'Education

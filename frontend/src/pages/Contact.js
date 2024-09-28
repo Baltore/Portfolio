@@ -28,6 +28,7 @@ const Contact = () => {
         <nav>
           <ul>
             <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/aboutme">About Me</Link></li>
             <li><Link to="/education">Education</Link></li>
             <li><Link to="/projets">Projet</Link></li>
             <li><Link to="/experience">Expérience</Link></li>
@@ -37,7 +38,7 @@ const Contact = () => {
         </nav>
       </header>
       <body>
-      <h1>Liste des Contacts</h1>
+      <h1> Contacts :</h1>
       <section className="contact-container">
         {contacts.map(contact => (
         <form key={contact.ID} className="contact-item">

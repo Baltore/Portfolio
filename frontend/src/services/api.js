@@ -5,6 +5,13 @@ const api = axios.create({
   baseURL: 'http://localhost:8080',  // L'URL de ton backend (assure-toi qu'il fonctionne sur ce port)
 });
 
+// Gestion des requêtes pour la section AboutMe
+export const getAboutMe = () => api.get('/admin/aboutme');
+export const addAboutMe = (data) => api.post('/admin/aboutme', data);
+export const updateAboutMe = (id, data) => api.put(`/admin/aboutme/${id}`, data);
+export const deleteAboutMe = (id) => api.delete(`/admin/aboutme/${id}`);
+
+
 // Gestion des requêtes pour la section Éducation
 export const getEducations = () => api.get('/admin/educations');
 export const addEducation = (data) => api.post('/admin/educations', data);

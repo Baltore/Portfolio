@@ -7,12 +7,14 @@ import Experience from './pages/Experience';
 import Contact from './pages/Contact';
 import AdminPage from './pages/AdminPage';
 import Skill from './pages/Skill';
+import AboutMe from './pages/AboutMe';
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aboutme" element={<AboutMe />} />
         <Route path="/education" element={<Education />} />
         <Route path="/projets" element={<Projet />} />
         <Route path="/experience" element={<Experience />} />

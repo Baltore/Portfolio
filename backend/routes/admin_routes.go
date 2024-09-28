@@ -9,6 +9,10 @@ import (
 func AdminRoutes(router *gin.Engine) {
 	adminGroup := router.Group("/admin")
 	{
+		// Routes pour les Aboutme
+		adminGroup.GET("/aboutme", controllers.GetAboutMe)
+		adminGroup.PUT("/aboutme/:id", controllers.UpdateAboutMe)
+		adminGroup.DELETE("/aboutme/:id", controllers.DeleteAboutMe)
 
 		// Routes pour les projets
 		adminGroup.GET("/projets", controllers.GetProjets)

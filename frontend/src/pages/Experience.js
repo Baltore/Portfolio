@@ -27,8 +27,10 @@ const Experience = () => {
         <nav>
           <ul>
             <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/aboutme">About Me</Link></li>
             <li><Link to="/education">Education</Link></li>
             <li><Link to="/projets">Projet</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/skill">Skills</Link></li>
             <li><Link to="/admin">Admin</Link></li>
           </ul>

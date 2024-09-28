@@ -27,8 +27,10 @@ const Projet = () => {
         <nav>
           <ul>
             <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/aboutme">About Me</Link></li>
             <li><Link to="/education">Education</Link></li>
             <li><Link to="/experience">Expérience</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/skill">Skills</Link></li>
             <li><Link to="/admin">Admin</Link></li>
           </ul>
@@ -43,8 +45,7 @@ const Projet = () => {
           <h2>{projet.Name}</h2>
           <p>Description: {projet.Description}</p>
           <p>Tecnologie: {projet.Technologie}</p>
-          <p>Démarrage: {projet.StartDate}</p>
-          <p>Fin: {projet.EndDate}</p>
+          <p>Date : {projet.StartDate} / {projet.EndDate}</p>
           <p>Lien: <a href={projet.Lien} target="_blank" rel="noopener noreferrer">{projet.Lien}</a></p>
         </li>
       ))}
