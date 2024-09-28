@@ -1,13 +1,13 @@
 package models
 
 type AboutMe struct {
-	ID          uint   `gorm:"primaryKey"`
-	Nom         string `json:"nom"`
-	Prenom      string `json:"prenom"`
-	Description string `json:"description"`
-	Email       string `json:"email"`
-	Telephone   string `json:"telephone"`
-	Image       []byte `json:"image"`
+	ID          uint `gorm:"primaryKey"`
+	Nom         string
+	Prenom      string
+	Description string
+	Email       string
+	Telephone   string
+	Image       []byte
 }
 
 func (AboutMe) TableName() string {
