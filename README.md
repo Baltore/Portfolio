@@ -37,6 +37,8 @@ Le state management est géré avec Redux (pour React).
 ## Prérequis
 
 Go (1.16 ou supérieur)
+
 Node.js (pour le frontend)
-SQLite (ou PostgreSQL si configuré)
+
+SQLite (bdd)
 
