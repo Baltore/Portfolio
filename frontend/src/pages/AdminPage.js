@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'; // Utilisation de useNavigate
-import './AdminPage.css';
+// Importation des bibliothèques nécessaires
+import React, { useEffect, useState } from 'react'; // Importation de React et des hooks useEffect et useState
+import axios from 'axios'; // Importation d'axios pour effectuer des requêtes HTTP
+import { Link, useNavigate } from 'react-router-dom'; // Importation de Link pour la navigation et useNavigate pour rediriger
+import './AdminPage.css'; // Importation du fichier CSS pour le style de la page d'administration
 
+// Définition du composant AdminPage
 const AdminPage = () => {
-  const [selectedPage, setSelectedPage] = useState('');
 
-  // Les données des différentes sections
+  // Déclaration des états pour la gestion des données et des formulaires
+  const [selectedPage, setSelectedPage] = useState('');// État pour la page sélectionnée dans le menu déroulant
+
+  // États pour stocker les données récupérées des différentes sections
   const [educationData, setEducationData] = useState([]);
   const [projetsData, setProjetsData] = useState([]);
   const [experienceData, setExperienceData] = useState([]);
@@ -14,15 +18,16 @@ const AdminPage = () => {
   const [contactsData, setContactsData] = useState([]);
   const [aboutmeData, setAboutMeData] = useState([]);
 
-  // Les données en cours de modification
+  // État pour les données actuellement en cours de modification
   const [editData, setEditData] = useState(null);
   const [newData, setNewData] = useState({});
 
-  const navigate = useNavigate(); // Utilisation de useNavigate pour la navigation
+  const navigate = useNavigate(); // Initialisation de useNavigate pour rediriger l'utilisateur
 
-  // Fonction de chargement des données
+  // Fonction pour charger les données à partir de l'API
   const fetchData = async () => {
     try {
+      // Requêtes GET pour récupérer les données des différentes sections
       const aboutmeResponse = await axios.get('http://localhost:8080/admin/aboutme');
       const educationResponse = await axios.get('http://localhost:8080/admin/educations');
       const projetsResponse = await axios.get('http://localhost:8080/admin/projets');
@@ -30,6 +35,7 @@ const AdminPage = () => {
       const skillsResponse = await axios.get('http://localhost:8080/admin/skills');
       const contactsResponse = await axios.get('http://localhost:8080/admin/contacts');
 
+      // Mise à jour des états avec les données récupérées
       setAboutMeData(aboutmeResponse.data);
       setEducationData(educationResponse.data);
       setProjetsData(projetsResponse.data);
@@ -37,67 +43,76 @@ const AdminPage = () => {
       setSkillsData(skillsResponse.data);
       setContactsData(contactsResponse.data);
     } catch (error) {
+      // Gestion des erreurs en cas d'échec de la requête
       console.error('Erreur lors du chargement des données :', error);
     }
   };
 
-  // Appel de fetchData lorsque le composant se monte
+  // Utilisation de useEffect pour charger les données lors du montage du composant
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(); // Appel de la fonction fetchData pour récupérer les données
+  }, []); // Le tableau vide [] signifie que l'effet ne s'exécute qu'une seule fois après le premier rendu
 
-  // Gérer l'édition des données
+  // Fonction pour gérer l'édition des données
   const handleEdit = (item) => {
-    setEditData(item);  // Permet de modifier la ligne sélectionnée
+    setEditData(item);  // Permet de mettre à jour l'état avec l'élément sélectionné pour modification
   };
 
+  // Fonction pour confirmer les modifications apportées
   const handleConfirmEdit = async (id) => {
     try {
+      // Construction de l'URL dynamique pour envoyer les données modifiées
       const url = `http://localhost:8080/admin/${selectedPage}/${id}`; // URL dynamique selon la page sélectionnée
-      await axios.put(url, editData);  // Envoie les données modifiées
-      alert('Modifications enregistrées avec succès !');
-      setEditData(null);  // Réinitialise l'édition
-      fetchData();  // Recharger les données après la modification
+      await axios.put(url, editData);  // Envoi des données modifiées à l'API
+      alert('Modifications enregistrées avec succès !'); // Alerte de succès
+      setEditData(null);  // Réinitialisation de l'état d'édition
+      fetchData();  // Rechargement des données après la modification
     } catch (error) {
+      // Gestion des erreurs en cas de problème lors de la mise à jour
       console.error('Erreur lors de la mise à jour :', error);
       alert('Une erreur est survenue lors de la mise à jour.');
     }
   };
 
-  // Fonction pour supprimer un objet
+  // Fonction pour supprimer un élément
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/admin/${selectedPage}/${id}`);
+      await axios.delete(`http://localhost:8080/admin/${selectedPage}/${id}`); // Envoi de la requête de suppression
       alert("Suppression réussie !");
-      fetchData(); // Recharger les données après suppression
+      fetchData(); // Rechargement des données après suppression
     } catch (error) {
+      // Gestion des erreurs en cas de problème lors de la suppression
       console.error('Erreur lors de la suppression des données :', error);
       alert("Erreur lors de la suppression des données.");
     }
   };
 
-  // Gérer l'ajout d'une nouvelle entrée
+  // Fonction pour ajouter une nouvelle entrée
   const handleAddNew = async () => {
     try {
-      await axios.post(`http://localhost:8080/admin/${selectedPage}`, newData);
+      await axios.post(`http://localhost:8080/admin/${selectedPage}`, newData); // Envoi des nouvelles données
       alert("Ajout réussi !");
-      setNewData({}); // Réinitialiser le formulaire
-      fetchData(); // Recharger les données
+      setNewData({}); // Réinitialisation de l'état pour le formulaire
+      fetchData(); // Rechargement des données après l'ajout
     } catch (error) {
+      // Gestion des erreurs en cas de problème lors de l'ajout
       console.error('Erreur lors de l\'ajout de nouvelles données :', error);
       alert("Erreur lors de l'ajout.");
     }
   };
 
+  // Fonction pour gérer les changements dans les champs d'entrée
   const handleInputChange = (field, value) => {
-    setEditData({ ...editData, [field]: value });
+    setEditData({ ...editData, [field]: value }); // Mise à jour de l'état d'édition avec la nouvelle valeur
   };
 
+  // Fonction pour gérer la déconnexion
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/login'); // Redirige vers la page de connexion
-};
+    localStorage.removeItem('isAuthenticated'); // Suppression du jeton d'authentification
+    navigate('/login'); // Redirection vers la page de connexion
+  };
 
+  // Labels pour les champs des formulaires
   const fieldLabels = {
     Prenom: 'Prénom',
     Nom: 'Nom',
@@ -116,7 +131,7 @@ const AdminPage = () => {
     LvlCompetence: 'Niveau de Compétence'
   };
   
-  // Rendre une section
+  // Fonction pour rendre une section de table
   const renderTableSection = (title, data, fields) => (
     <section className="admin">
       <h2>{title}</h2>
@@ -165,7 +180,7 @@ const AdminPage = () => {
     </section>
   );
 
-  // Formulaire pour ajouter de nouvelles données
+  // Fonction pour ajouter de nouvelles données
   const renderAddNewForm = (fields) => (
     <div className="add-new-form">
       <h3>Ajouter un nouvel élément</h3>

@@ -1,6 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0;/* Supprime la marge par défaut du corps */
+  padding: 0; /* Supprime le padding par défaut du corps */
   overflow-y: auto; /* Permet le défilement vertical */
 }
 
@@ -13,9 +13,9 @@ body {
 }
 
 .column-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; /* Utilise flexbox pour aligner les éléments */
+  justify-content: space-between; /* Espace entre les éléments */
+  align-items: center; /* Centre verticalement les éléments */
 }
 
 .separator {
@@ -23,202 +23,200 @@ body {
   height: 50px; /* Hauteur du séparateur */
 }
 
-
 .admin {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 20px; /* Ajoute un espace autour du contenu de la page admin */
+  max-width: 800px; /* Limite la largeur maximale du conteneur */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
 }
 
 .admin h1 {
-  text-align: center;
+  text-align: center; /* Centre le titre */
 }
 
-/* Section title centered above the table */
+/* Titre de la section centré au-dessus de la table */
 .table-title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  text-align: center; /* Centre le titre */
+  font-size: 24px; /* Définit la taille de la police */
+  font-weight: bold; /* Définit le poids de la police en gras */
+  margin-bottom: 20px; /* Ajoute un espace en bas du titre */
 }
-
 
 .table-container {
-  display: block;
-  flex-direction: column;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 20px 5px rgb(0, 0, 0);
+  display: block; /* Définit l'affichage comme un bloc */
+  flex-direction: column; /* Direction des flex items */
+  border-bottom: 1px solid black; /* Bordure inférieure de la section */
+  margin-bottom: 20px; /* Ajoute de l'espace entre les sections */
+  box-shadow: 0px 2px 20px 5px rgb(0, 0, 0); /* Ombre portée autour de la section */
 }
 
 .column-header {
-  display: flex;
-  justify-content: space-evenly;
-  padding-bottom: 10px;
-  font-weight: bold;
+  display: flex; /* Utilise flexbox pour aligner les éléments */
+  justify-content: space-evenly; /* Espace égal entre les éléments */
+  padding-bottom: 10px; /* Ajoute de l'espace en bas du header */
+  font-weight: bold; /* Définit le poids de la police en gras */
 }
 
-/* Styling for the two columns */
+/* Styles pour les deux colonnes */
 .info-column,
 .modify-column {
-  flex: 1;
-  padding: 10px;
+  flex: 1; /* Chaque colonne prend un espace égal */
+  padding: 10px; /* Ajoute de l'espace à l'intérieur des colonnes */
 }
 
 .separator {
-  border-left: 1px solid black;
-  height: 100%;
+  border-left: 1px solid black; /* Séparateur vertical */
+  height: 100%; /* Hauteur du séparateur à 100% */
 }
 
 .table-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
+  display: flex; /* Utilise flexbox pour afficher les lignes */
+  justify-content: space-between; /* Espace entre les éléments de la ligne */
+  padding: 10px 0; /* Ajoute de l'espace en haut et en bas */
 }
 
-/* Information column styles */
+/* Styles pour la colonne d'information */
 .info-column p {
-  margin: 5px 0;
+  margin: 5px 0; /* Ajoute un espace en haut et en bas des paragraphes */
 }
 
-/* Text input for modifications */
+/* Champ de texte pour les modifications */
 .modify-column input {
-  width: 90%;
-  margin: 5px 0;
+  width: 90%; /* Définit la largeur des champs à 90% */
+  margin: 5px 0; /* Ajoute un espace en haut et en bas */
 }
 
-/* Modify button styles */
+/* Styles pour le bouton de modification */
 .modify-button {
-  margin: 20px auto; /* Center the button horizontally */
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: block; /* Makes the button block level for centering */
+  margin: 20px auto; /* Centre le bouton horizontalement */
+  padding: 10px 20px; /* Ajoute de l'espace à l'intérieur du bouton */
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure par défaut */
+  cursor: pointer; /* Change le curseur en main au survol */
+  display: block; /* Définit le bouton en tant qu'élément de bloc pour le centrage */
 }
 
 .modify-button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Couleur de fond au survol */
 }
 
 /* Style pour le conteneur de la sélection */
 .page-selection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 20px;
+  display: flex; /* Utilise flexbox pour aligner les éléments */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: flex-start; /* Aligne les éléments à gauche */
+  margin: 20px; /* Ajoute une marge autour du conteneur */
 }
 
 .page-selection label {
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 8px;
+  font-size: 18px; /* Définit la taille de la police du label */
+  font-weight: bold; /* Définit le poids de la police en gras */
+  color: #ffffff; /* Couleur du texte */
+  margin-bottom: 8px; /* Ajoute de l'espace en bas du label */
 }
 
 /* Style du menu déroulant */
 .page-selection select {
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px 20px; /* Ajoute de l'espace à l'intérieur du menu déroulant */
+  font-size: 16px; /* Définit la taille de la police */
+  font-weight: 500; /* Définit le poids de la police */
+  color: #000000; /* Couleur du texte */
+  background-color: #ffffff; /* Couleur de fond */
+  border: 1px solid #ccc; /* Bordure du menu déroulant */
+  border-radius: 8px; /* Arrondit les coins */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre portée */
   appearance: none; /* Supprime l'apparence par défaut du navigateur */
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  width: 250px;
-  position: relative;
+  cursor: pointer; /* Change le curseur en main au survol */
+  transition: all 0.3s ease-in-out; /* Transition pour les effets */
+  width: 250px; /* Largeur fixe du menu déroulant */
+  position: relative; /* Positionnement relatif pour le contenu */
 }
 
 /* Flèche du menu déroulant */
 .page-selection select::after {
-  content: '▼';
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  content: '▼'; /* Affiche une flèche vers le bas */
+  position: absolute; /* Positionnement absolu */
+  right: 10px; /* Positionne à droite */
+  top: 50%; /* Centre verticalement */
+  transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
 }
 
 /* Style lors du survol */
 .page-selection select:hover {
-  background-color: #e0e0e0;
-  border-color: #888;
+  background-color: #e0e0e0; /* Couleur de fond au survol */
+  border-color: #888; /* Couleur de bordure au survol */
 }
 
 /* Style lors de la sélection */
 .page-selection select:focus {
-  outline: none;
-  background-color: #ffffff;
-  border-color: #007bff;
-  box-shadow: 0 0 10px black;
+  outline: none; /* Supprime le contour par défaut */
+  background-color: #ffffff; /* Couleur de fond */
+  border-color: #007bff; /* Couleur de bordure au focus */
+  box-shadow: 0 0 10px black; /* Ombre portée au focus */
 }
 
 /* Style pour les options */
 .page-selection select option {
-  padding: 10px;
-  font-size: 16px;
+  padding: 10px; /* Ajoute de l'espace à l'intérieur des options */
+  font-size: 16px; /* Définit la taille de la police */
 }
 
 /* Adaptation pour les petits écrans */
 @media (max-width: 768px) {
   .page-selection select {
-    width: 100%;
-    padding: 10px;
+    width: 100%; /* Largeur à 100% pour les petits écrans */
+    padding: 10px; /* Ajuste le padding */
   }
 }
 
 .confirm-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
+  padding: 10px 20px; /* Ajoute de l'espace à l'intérieur du bouton */
+  background-color: #28a745; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure par défaut */
+  cursor: pointer; /* Change le curseur en main au survol */
+  margin-top: 10px; /* Ajoute un espace en haut */
 }
 
 .confirm-button:hover {
-  background-color: #218838;
+  background-color: #218838; /* Couleur de fond au survol */
 }
 
 /* Bouton de suppression */
 .delete-button {
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: red;
-  color: white;
-  border: none;
-  cursor: pointer;
+  margin: 20px auto; /* Centre le bouton horizontalement */
+  padding: 10px 20px; /* Ajoute de l'espace à l'intérieur du bouton */
+  background-color: red; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure par défaut */
+  cursor: pointer; /* Change le curseur en main au survol */
 }
 
 .delete-button:hover {
-  background-color: darkred;
+  background-color: darkred; /* Couleur de fond au survol */
 }
 
 /* Formulaire d'ajout */
 .add-new-form {
-  margin-top: 20px;
+  margin-top: 20px; /* Ajoute un espace en haut */
 }
 
 .add-new-form input {
-  display: block;
-  margin: 10px 0;
-  width: 20%;
+  display: block; /* Définit l'affichage en tant qu'élément de bloc */
+  margin: 10px 0; /* Ajoute de l'espace en haut et en bas */
+  width: 20%; /* Largeur fixe du champ */
 }
 
 .add-button {
-  padding: 10px 20px;
-  background-color: green;
-  color: white;
-  border: none;
-  cursor: pointer;
+  padding: 10px 20px; /* Ajoute de l'espace à l'intérieur du bouton */
+  background-color: green; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border: none; /* Supprime la bordure par défaut */
+  cursor: pointer; /* Change le curseur en main au survol */
 }
 
 .add-button:hover {
-  background-color: darkgreen;
+  background-color: darkgreen; /* Couleur de fond au survol */
 }
 
 .buttonDeco {

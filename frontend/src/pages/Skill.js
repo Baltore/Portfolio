@@ -3,23 +3,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Skill = () => {
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState([]); // État pour stocker les compétences
   const [error, setError] = useState(null); // État pour stocker les messages d'erreur
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        // Utiliser l'URL complète
-        const response = await axios.get('http://localhost:8080/admin/skills');
-        setSkills(response.data);
+        const response = await axios.get('http://localhost:8080/admin/skills'); // Requête pour récupérer les compétences
+        setSkills(response.data); // Mettre à jour l'état avec les compétences récupérées
       } catch (error) {
         console.error("Error fetching skill data:", error);
         setError("Impossible de récupérer les données des compétences."); // Message d'erreur
       }
     };
 
-    fetchSkills();
-  }, []);
+    fetchSkills(); // Appel de la fonction pour récupérer les compétences
+  }, []); 
 
   return (
     <div>
@@ -38,10 +37,10 @@ const Skill = () => {
       </header>
       <body>
       <h1>Compétences</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Affichage du message d'erreur si présent */}
       <ul className="aboutme-list">
         {skills.map(skill => (
-          <li key={skill.ID} className="aboutme-block">
+          <li key={skill.ID} className="aboutme-block"> {/* Élément de la liste pour chaque compétence */}
             <h2>{skill.SkillName}</h2>
             <p>Niveau: {skill.LvlCompetence}</p>
           </li>

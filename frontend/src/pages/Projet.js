@@ -3,22 +3,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Projet = () => {
-  const [projets, setProjets] = useState([]);
+  const [projets, setProjets] = useState([]); // État pour stocker les projets
   const [error, setError] = useState(null); // État pour stocker les messages d'erreur
 
   useEffect(() => {
     const fetchProjets = async () => {
       try {
         // Utiliser l'URL complète
-        const response = await axios.get('http://localhost:8080/admin/projets');
-        setProjets(response.data);
+        const response = await axios.get('http://localhost:8080/admin/projets');  // Requête pour récupérer les projets
+        setProjets(response.data); // Mettre à jour l'état avec les projets récupérées
       } catch (error) {
         console.error("Error fetching projet data:", error);
         setError("Impossible de récupérer les données des projets."); // Message d'erreur
       }
     };
 
-    fetchProjets();
+    fetchProjets(); // Appel de la fonction pour récupérer les projets
   }, []);
 
   return (
@@ -38,10 +38,10 @@ const Projet = () => {
       </header>
       <body>
       <h1>Projets</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Affichage du message d'erreur si présent */}
       <ul className="aboutme-list">
       {projets.map(projet => (
-        <li key={projet.ID} className="aboutme-block">
+        <li key={projet.ID} className="aboutme-block"> {/* Élément de la liste pour chaque Projet */}
           <h2>{projet.Name}</h2>
           <p>Description: {projet.Description}</p>
           <p>Tecnologie: {projet.Technologie}</p>

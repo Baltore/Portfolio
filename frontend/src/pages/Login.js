@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState(''); // État pour stocker le login
+  const [password, setPassword] = useState(''); // État pour stocker les messages d'erreur
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:8080/admin/login', { username, password });
+      const response = await axios.post('http://localhost:8080/admin/login', { username, password }); // Requête pour récupérer le login
       
       // Vérification de la réponse
       if (response.data.message === "Login successful") {
