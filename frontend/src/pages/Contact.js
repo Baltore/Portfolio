@@ -32,13 +32,13 @@ const Contact = () => {
             <li><Link to="/education">Education</Link></li>
             <li><Link to="/projets">Projet</Link></li>
             <li><Link to="/experience">Expérience</Link></li>
-            <li><Link to="/skill">Skills</Link></li>
+            <li><Link to="/skills">Skills</Link></li>
             <li><Link to="/admin">Admin</Link></li>
           </ul>
         </nav>
       </header>
       <body>
-      <h1> Contacts :</h1>
+      <h1> Contacts</h1>
       <section className="contact-container">
         {contacts.map(contact => (
         <form key={contact.ID} className="contact-item">

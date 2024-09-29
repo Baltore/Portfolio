@@ -31,7 +31,7 @@ const Education = () => {
             <li><Link to="/projets">Projet</Link></li>
             <li><Link to="/experience">Expérience</Link></li>
             <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/skill">Skills</Link></li>
+            <li><Link to="/skills">Skills</Link></li>
             <li><Link to="/admin">Admin</Link></li>
           </ul>
         </nav>

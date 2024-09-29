@@ -1,68 +1,227 @@
 import React, { useEffect, useState } from 'react';
-import { getEducations, getProjets, getExperiences, getSkills, getContacts, updateEducation, updateProjet, updateExperience, updateSkill, updateContact } from '../services/api'; // Import des services
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './AdminPage.css';
 
 const AdminPage = () => {
+  const [selectedPage, setSelectedPage] = useState('');
+  
+  // Les données des différentes sections
   const [educationData, setEducationData] = useState([]);
   const [projetsData, setProjetsData] = useState([]);
   const [experienceData, setExperienceData] = useState([]);
   const [skillsData, setSkillsData] = useState([]);
   const [contactsData, setContactsData] = useState([]);
-  const [editData, setEditData] = useState(null); // Pour gérer l'édition
+  const [aboutmeData, setAboutMeData] = useState([]);
+  
+  // Les données en cours de modification
+  const [editData, setEditData] = useState(null);
+  const [newData, setNewData] = useState({});
 
+  // Fonction de chargement des données
+  const fetchData = async () => {
+    try {
+      const aboutmeResponse = await axios.get('http://localhost:8080/admin/aboutme');
+      const educationResponse = await axios.get('http://localhost:8080/admin/educations');
+      const projetsResponse = await axios.get('http://localhost:8080/admin/projets');
+      const experienceResponse = await axios.get('http://localhost:8080/admin/experiences');
+      const skillsResponse = await axios.get('http://localhost:8080/admin/skills');
+      const contactsResponse = await axios.get('http://localhost:8080/admin/contacts');
+
+      setAboutMeData(aboutmeResponse.data);
+      setEducationData(educationResponse.data);
+      setProjetsData(projetsResponse.data);
+      setExperienceData(experienceResponse.data);
+      setSkillsData(skillsResponse.data);
+      setContactsData(contactsResponse.data);
+    } catch (error) {
+      console.error('Erreur lors du chargement des données :', error);
+    }
+  };
+
+  // Appel de fetchData lorsque le composant se monte
   useEffect(() => {
-    // Charger les données dès le chargement de la page
-    const fetchData = async () => {
-      try {
-        const educationResponse = await getEducations();
-        const projetsResponse = await getProjets();
-        const experienceResponse = await getExperiences();
-        const skillsResponse = await getSkills();
-        const contactsResponse = await getContacts();
-
-        setEducationData(educationResponse.data);
-        setProjetsData(projetsResponse.data);
-        setExperienceData(experienceResponse.data);
-        setSkillsData(skillsResponse.data);
-        setContactsData(contactsResponse.data);
-      } catch (error) {
-        console.error('Erreur lors du chargement des données :', error);
-      }
-    };
-
     fetchData();
   }, []);
 
-  // Fonction pour gérer l'enregistrement des modifications
-  const handleSave = async (entityType, updatedData) => {
+  // Gérer l'édition des données
+  const handleEdit = (item) => {
+    setEditData(item);  // Permet de modifier la ligne sélectionnée
+  };
+
+  const handleConfirmEdit = async (id) => {
     try {
-      switch (entityType) {
-        case 'education':
-          await updateEducation(updatedData.id, updatedData);
-          setEducationData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
-          break;
-        case 'projet':
-          await updateProjet(updatedData.id, updatedData);
-          setProjetsData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
-          break;
-        case 'experience':
-          await updateExperience(updatedData.id, updatedData);
-          setExperienceData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
-          break;
-        case 'skill':
-          await updateSkill(updatedData.id, updatedData);
-          setSkillsData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
-          break;
-        case 'contact':
-          await updateContact(updatedData.id, updatedData);
-          setContactsData(prevData => prevData.map(item => (item.id === updatedData.id ? updatedData : item)));
-          break;
-        default:
-          console.error('Type d’entité inconnu');
-      }
-      setEditData(null); // Fermer l'édition après la sauvegarde
+      const url = `http://localhost:8080/admin/${selectedPage}/${id}`; // URL dynamique selon la page sélectionnée
+      await axios.put(url, editData);  // Envoie les données modifiées
+      alert('Modifications enregistrées avec succès !');
+      setEditData(null);  // Réinitialise l'édition
+      fetchData();  // Recharger les données après la modification
     } catch (error) {
-      console.error('Erreur lors de la sauvegarde des données :', error);
+      console.error('Erreur lors de la mise à jour :', error);
+      alert('Une erreur est survenue lors de la mise à jour.');
+    }
+  };
+
+  // Fonction pour supprimer un objet
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/admin/${selectedPage}/${id}`);
+      alert("Suppression réussie !");
+      fetchData(); // Recharger les données après suppression
+    } catch (error) {
+      console.error('Erreur lors de la suppression des données :', error);
+      alert("Erreur lors de la suppression des données.");
+    }
+  };
+
+  // Gérer l'ajout d'une nouvelle entrée
+  const handleAddNew = async () => {
+    try {
+      await axios.post(`http://localhost:8080/admin/${selectedPage}`, newData);
+      alert("Ajout réussi !");
+      setNewData({}); // Réinitialiser le formulaire
+      fetchData(); // Recharger les données
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de nouvelles données :', error);
+      alert("Erreur lors de l'ajout.");
+    }
+  };
+
+  const handleInputChange = (field, value) => {
+    setEditData({ ...editData, [field]: value });
+  };
+
+  const fieldLabels = {
+    Prenom: 'Prénom',
+    Nom: 'Nom',
+    Description: 'Description',
+    Email: 'Email',
+    Telephone: 'Téléphone',
+    Diplome: 'Diplôme',
+    SchoolName: 'École',
+    StartDate: 'Date de début',
+    EndDate: 'Date de fin',
+    Name: 'Nom du Projet',
+    Technologie: 'Technologie',
+    Lien: 'Lien',
+    WorkName: 'Nom du Travail',
+    SkillName: 'Compétence',
+    LvlCompetence: 'Niveau de Compétence'
+  };
+  
+  // Rendre une section
+  const renderTableSection = (title, data, fields) => (
+    <section className="admin">
+      <h2>{title}</h2>
+      <div className="table-container">
+        <div className="column-header">
+          <h3>Information</h3>
+          <div className="separator" />
+          <h3>Modification</h3>
+        </div>
+        {data.map((item) => (
+          <div key={item.ID} className="table-row">
+            <div className="info-column">
+              {fields.map(field => (
+                <p key={field}>
+                  <strong>{fieldLabels[field]} :</strong> {item[field]}
+                </p>
+              ))}
+            </div>
+            <div className="separator" />
+            <div className="modify-column">
+              {editData?.ID === item.ID ? (
+                <>
+                  {fields.map(field => (
+                    <input
+                      key={field}
+                      type="text"
+                      value={editData[field] || ""}
+                      onChange={(e) => handleInputChange(field, e.target.value)}
+                    />
+                  ))}
+                  <button
+                    className="confirm-button"
+                    onClick={() => handleConfirmEdit(item.ID)}
+                  >
+                    Confirmer
+                  </button>
+                </>
+              ) : (
+                <button className="modify-button" onClick={() => handleEdit(item)}>Modifier</button>
+              )}
+              <button className="delete-button" onClick={() => handleDelete(item.ID)}>Supprimer</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
+  // Formulaire pour ajouter de nouvelles données
+  const renderAddNewForm = (fields) => (
+    <div className="add-new-form">
+      <h3>Ajouter un nouvel élément</h3>
+      {fields.map(field => (
+        <input
+          key={field}
+          type="text"
+          placeholder={`New ${fieldLabels[field]}`}
+          value={newData[field] || ""}
+          onChange={(e) => setNewData({ ...newData, [field]: e.target.value })}
+        />
+      ))}
+      <button className="add-button" onClick={handleAddNew}>Ajouter</button>
+    </div>
+  );
+
+  // Afficher les sections selon la sélection
+  const renderSelectedSection = () => {
+    switch (selectedPage) {
+      case 'aboutme':
+        return (
+          <>
+            {renderTableSection('À Propos de Moi', aboutmeData, ['Prenom', 'Nom', 'Description', 'Email', 'Telephone'])}
+            {renderAddNewForm(['Prenom', 'Nom', 'Description', 'Email', 'Telephone'])}
+          </>
+        );
+      case 'educations':
+        return (
+          <>
+            {renderTableSection('Éducation', educationData, ['Diplome', "SchoolName", "StartDate", "EndDate"])}
+            {renderAddNewForm(['Diplome', "SchoolName", "StartDate", "EndDate"])}
+          </>
+        );
+      case 'projets':
+        return (
+          <>
+            {renderTableSection('Projets', projetsData, ['Name', "Description", "Technologie", "StartDate", "EndDate", "Lien"])}
+            {renderAddNewForm(['Name', "Description", "Technologie", "StartDate", "EndDate", "Lien"])}
+          </>
+        );
+      case 'experiences':
+        return (
+          <>
+            {renderTableSection('Expérience', experienceData, ['WorkName', "Description", "StartDate", "EndDate"])}
+            {renderAddNewForm(['WorkName', "Description", "StartDate", "EndDate"])}
+          </>
+        );
+      case 'skills':
+        return (
+          <>
+            {renderTableSection('Compétences', skillsData, ['SkillName', "LvlCompetence"])}
+            {renderAddNewForm(['SkillName', "LvlCompetence"])}
+          </>
+        );
+      case 'contacts':
+        return (
+          <>
+            {renderTableSection('Contacts', contactsData, ['Nom', "Prenom", "Email", "Telephone"])}
+            {renderAddNewForm(['Nom', "Prenom", "Email", "Telephone"])}
+          </>
+        );
+      default:
+        return null;
     }
   };
 
@@ -71,114 +230,34 @@ const AdminPage = () => {
       <header className="header">
         <nav>
           <ul>
-            <li><Link to="http://localhost:3000">Home</Link></li>
+            <li><Link to="/">Home</Link></li>
             <li><Link to="/aboutme">About Me</Link></li>
             <li><Link to="/education">Education</Link></li>
-            <li><Link to="/projets">Projet</Link></li>
-            <li><Link to="/experience">Expérience</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/skill">Skills</Link></li>
+            <li><Link to="/projets">Projects</Link></li>
+            <li><Link to="/experience">Experience</Link></li>
+            <li><Link to="/skills">Skills</Link></li>
+            <li><Link to="/contacts">Contacts</Link></li>
           </ul>
         </nav>
-      </header>
-      <body>
-      <h1>Page d'Administration</h1>
-
-      <section>
-        <h2>Éducation</h2>
-        {educationData.map((edu) => (
-          <div key={edu.id}>
-            {editData?.id === edu.id ? (
-              <input
-                type="text"
-                value={editData.school_name}
-                onChange={(e) => setEditData({ ...editData, school_name: e.target.value })}
-              />
-            ) : (
-              <p>{edu.school_name}</p>
-            )}
-            <button onClick={() => setEditData(edu)}>Modifier</button>
-            {editData?.id === edu.id && <button onClick={() => handleSave('education', editData)}>Enregistrer</button>}
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Projets</h2>
-        {projetsData.map((projet) => (
-          <div key={projet.id}>
-            {editData?.id === projet.id ? (
-              <input
-                type="text"
-                value={editData.name}
-                onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-              />
-            ) : (
-              <p>{projet.name}</p>
-            )}
-            <button onClick={() => setEditData(projet)}>Modifier</button>
-            {editData?.id === projet.id && <button onClick={() => handleSave('projet', editData)}>Enregistrer</button>}
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Expérience</h2>
-        {experienceData.map((exp) => (
-          <div key={exp.id}>
-            {editData?.id === exp.id ? (
-              <input
-                type="text"
-                value={editData.work_name}
-                onChange={(e) => setEditData({ ...editData, work_name: e.target.value })}
-              />
-            ) : (
-              <p>{exp.work_name}</p>
-            )}
-            <button onClick={() => setEditData(exp)}>Modifier</button>
-            {editData?.id === exp.id && <button onClick={() => handleSave('experience', editData)}>Enregistrer</button>}
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Compétences</h2>
-        {skillsData.map((skill) => (
-          <div key={skill.id}>
-            {editData?.id === skill.id ? (
-              <input
-                type="text"
-                value={editData.skill_name}
-                onChange={(e) => setEditData({ ...editData, skill_name: e.target.value })}
-              />
-            ) : (
-              <p>{skill.skill_name}</p>
-            )}
-            <button onClick={() => setEditData(skill)}>Modifier</button>
-            {editData?.id === skill.id && <button onClick={() => handleSave('skill', editData)}>Enregistrer</button>}
-          </div>
-        ))}
-      </section>
-
-      <section>
-        <h2>Contacts</h2>
-        {contactsData.map((contact) => (
-          <div key={contact.id}>
-            {editData?.id === contact.id ? (
-              <input
-                type="text"
-                value={editData.nom}
-                onChange={(e) => setEditData({ ...editData, nom: e.target.value })}
-              />
-            ) : (
-              <p>{contact.nom}</p>
-            )}
-            <button onClick={() => setEditData(contact)}>Modifier</button>
-            {editData?.id === contact.id && <button onClick={() => handleSave('contact', editData)}>Enregistrer</button>}
-          </div>
-        ))}
-      </section>
-      </body>
+        </header>
+      <div>
+        <h1>Administration</h1>
+        <div className="page-selection">
+          <label>Quelle page voulez-vous modifier ?</label>
+          <select value={selectedPage} onChange={(e) => setSelectedPage(e.target.value)}>
+            <option value="">Sélectionnez une page</option>
+            <option value="aboutme">À propos de moi</option>
+            <option value="educations">Éducation</option>
+            <option value="projets">Projets</option>
+            <option value="experiences">Expériences</option>
+            <option value="skills">Compétences</option>
+            <option value="contacts">Contacts</option>
+          </select>
+        </div>
+      <main>
+        {renderSelectedSection()}
+      </main>
+    </div>
     </div>
   );
 };

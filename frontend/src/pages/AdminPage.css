@@ -1,46 +1,222 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Permet le défilement vertical */
+}
+
 .admin {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .admin h1 {
-    text-align: center;
-  }
-  
-  .admin-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .admin-item input,
-  .admin-item textarea {
-    margin: 5px 0;
+  padding: 20px; /* Ajoute un espace autour du contenu */
+}
+
+.table-container {
+  margin-bottom: 20px; /* Ajoute de l'espace entre les sections */
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.separator {
+  border-left: 1px solid #000; /* Séparateur vertical */
+  height: 50px; /* Hauteur du séparateur */
+}
+
+
+.admin {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin h1 {
+  text-align: center;
+}
+
+/* Section title centered above the table */
+.table-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+.table-container {
+  display: block;
+  flex-direction: column;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 20px 5px rgb(0, 0, 0);
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Styling for the two columns */
+.info-column,
+.modify-column {
+  flex: 1;
+  padding: 10px;
+}
+
+.separator {
+  border-left: 1px solid black;
+  height: 100%;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+/* Information column styles */
+.info-column p {
+  margin: 5px 0;
+}
+
+/* Text input for modifications */
+.modify-column input {
+  width: 90%;
+  margin: 5px 0;
+}
+
+/* Modify button styles */
+.modify-button {
+  margin: 20px auto; /* Center the button horizontally */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: block; /* Makes the button block level for centering */
+}
+
+.modify-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style pour le conteneur de la sélection */
+.page-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px;
+}
+
+.page-selection label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+/* Style du menu déroulant */
+.page-selection select {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  appearance: none; /* Supprime l'apparence par défaut du navigateur */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 250px;
+  position: relative;
+}
+
+/* Flèche du menu déroulant */
+.page-selection select::after {
+  content: '▼';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Style lors du survol */
+.page-selection select:hover {
+  background-color: #e0e0e0;
+  border-color: #888;
+}
+
+/* Style lors de la sélection */
+.page-selection select:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #007bff;
+  box-shadow: 0 0 10px black;
+}
+
+/* Style pour les options */
+.page-selection select option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+  .page-selection select {
+    width: 100%;
     padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
   }
-  
-  .admin-item button {
-    margin: 5px 5px 0 0;
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .admin-item button:hover {
-    background-color: #0056b3;
-  }
-  
-  .admin-item button:last-of-type {
-    background-color: #dc3545;
-  }
-  
-  .admin-item button:last-of-type:hover {
-    background-color: #c82333;
-  }
+}
+
+.confirm-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+}
+
+/* Bouton de suppression */
+.delete-button {
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: darkred;
+}
+
+/* Formulaire d'ajout */
+.add-new-form {
+  margin-top: 20px;
+}
+
+.add-new-form input {
+  display: block;
+  margin: 10px 0;
+  width: 20%;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: darkgreen;
+}

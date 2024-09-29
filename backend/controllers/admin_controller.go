@@ -8,16 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetPerson retourne les informations d'une personne
-func GetPerson(c *gin.Context) {
-	var person models.Person // Assure-toi d'avoir un modèle pour la personne
-	if err := config.DB.First(&person).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Person not found"})
-		return
-	}
-	c.JSON(http.StatusOK, person)
-}
-
 // CRUD pour les Aboutme
 func GetAboutMe(c *gin.Context) {
 	var aboutme []models.AboutMe
@@ -26,6 +16,19 @@ func GetAboutMe(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, aboutme)
+}
+
+func CreateAboutMe(c *gin.Context) {
+	var aboutme models.AboutMe
+	if err := c.ShouldBindJSON(&aboutme); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&aboutme).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create AboutMe"})
+		return
+	}
+	c.JSON(http.StatusCreated, aboutme)
 }
 
 func UpdateAboutMe(c *gin.Context) {
@@ -55,43 +58,6 @@ func DeleteAboutMe(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "AboutMe deleted successfully"})
 }
 
-// CRUD pour les Projets
-func GetProjets(c *gin.Context) {
-	var projets []models.Projet
-	if err := config.DB.Find(&projets).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	c.JSON(http.StatusOK, projets)
-}
-
-func UpdateProjet(c *gin.Context) {
-	var projet models.Projet
-	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
-		return
-	}
-
-	if err := c.ShouldBindJSON(&projet); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	config.DB.Save(&projet)
-	c.JSON(http.StatusOK, gin.H{"message": "Projet updated successfully"})
-}
-
-func DeleteProjet(c *gin.Context) {
-	var projet models.Projet
-	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
-		return
-	}
-
-	config.DB.Delete(&projet)
-	c.JSON(http.StatusOK, gin.H{"message": "Projet deleted successfully"})
-}
-
 // CRUD pour l'Education
 func GetEducations(c *gin.Context) {
 	var educations []models.Education
@@ -100,6 +66,19 @@ func GetEducations(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, educations)
+}
+
+func CreateEducation(c *gin.Context) {
+	var education models.Education
+	if err := c.ShouldBindJSON(&education); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&education).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create Education"})
+		return
+	}
+	c.JSON(http.StatusCreated, education)
 }
 
 func UpdateEducation(c *gin.Context) {
@@ -129,6 +108,56 @@ func DeleteEducation(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Education deleted successfully"})
 }
 
+// CRUD pour les Projets
+func GetProjets(c *gin.Context) {
+	var projets []models.Projet
+	if err := config.DB.Find(&projets).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, projets)
+}
+
+func CreateProjet(c *gin.Context) {
+	var projet models.Projet
+	if err := c.ShouldBindJSON(&projet); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&projet).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create Projet"})
+		return
+	}
+	c.JSON(http.StatusCreated, projet)
+}
+
+func UpdateProjet(c *gin.Context) {
+	var projet models.Projet
+	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
+		return
+	}
+
+	if err := c.ShouldBindJSON(&projet); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	config.DB.Save(&projet)
+	c.JSON(http.StatusOK, gin.H{"message": "Projet updated successfully"})
+}
+
+func DeleteProjet(c *gin.Context) {
+	var projet models.Projet
+	if err := config.DB.Where("id = ?", c.Param("id")).First(&projet).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Projet not found"})
+		return
+	}
+
+	config.DB.Delete(&projet)
+	c.JSON(http.StatusOK, gin.H{"message": "Projet deleted successfully"})
+}
+
 // CRUD pour l'Experience
 func GetExperiences(c *gin.Context) {
 	var experiences []models.Experience
@@ -137,6 +166,19 @@ func GetExperiences(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, experiences)
+}
+
+func CreateExperience(c *gin.Context) {
+	var experience models.Experience
+	if err := c.ShouldBindJSON(&experience); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&experience).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create Experience"})
+		return
+	}
+	c.JSON(http.StatusCreated, experience)
 }
 
 func UpdateExperience(c *gin.Context) {
@@ -176,6 +218,19 @@ func GetSkills(c *gin.Context) {
 	c.JSON(http.StatusOK, skills)
 }
 
+func CreateContact(c *gin.Context) {
+	var contact models.Contact
+	if err := c.ShouldBindJSON(&contact); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&contact).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create Contact"})
+		return
+	}
+	c.JSON(http.StatusCreated, contact)
+}
+
 func UpdateSkill(c *gin.Context) {
 	var skill models.Skill
 	if err := config.DB.Where("id = ?", c.Param("id")).First(&skill).Error; err != nil {
@@ -211,6 +266,19 @@ func GetContacts(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, contacts)
+}
+
+func CreateSkill(c *gin.Context) {
+	var skill models.Skill
+	if err := c.ShouldBindJSON(&skill); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := config.DB.Create(&skill).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to create Skill"})
+		return
+	}
+	c.JSON(http.StatusCreated, skill)
 }
 
 // UpdateContact modifie un contact existant
