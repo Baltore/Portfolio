@@ -10,6 +10,8 @@ Le site présente des informations sur une personne en particulier, visibles par
 
 ## Fonctionnalités principales
 
+Code Admin : username  -> admin, password -> password
+
 Affichage des données : Les pages publiques affichent les données d'une seule personne sur plusieurs sections (projets, éducation, expériences, contacts, etc.).
 
 CRUD (Create, Read, Update, Delete) : L'interface d'administration permet de créer, lire, mettre à jour et supprimer des informations telles que des projets, des compétences, des expériences, etc.
