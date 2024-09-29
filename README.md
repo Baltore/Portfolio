@@ -44,3 +44,43 @@ Node.js (pour le frontend)
 
 SQLite (bdd)
 
+## Installation
+
+### Backend
+
+1. Clonez le dépôt :
+
+git clone https://github.com/Baltore/Portfolio.git
+cd portfolio
+
+2. Installez les dépendances :
+
+go mod tidy
+
+3. Configurez la base de données dans le fichier config/db.go.
+
+4. Lancez le serveur backend :
+
+go run main.go
+
+### Frontend
+
+1. Allez dans le dossier du frontend :
+
+cd frontend
+
+2. Installez les dépendances :
+
+npm install
+
+3. Lancez le serveur de développement :
+
+npm start
+
+### Utilisation
+
+1. Accédez au site via votre navigateur à l'adresse http://localhost:3000 pour voir les données du portfolio.
+
+2. Pour accéder à l'interface d'administration et modifier les données, rendez-vous sur http://localhost:3000/login Code Admin : username  -> admin, password -> password
+
+3. Vous pouvez ajouter, modifier ou supprimer des informations via les formulaires dans l'interface d'administration. Les modifications sont directement reflétées dans la base de données.
