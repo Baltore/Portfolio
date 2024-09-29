@@ -1,6 +1,6 @@
 # Portfolio
 
-Membres du groupe : Qays, Matthis, Jemima, Ahmed, Khalidou
+Membres du groupe : Qays, Matthis, Jemima, Hamed, Khalidou
 
 ## Description
 
