@@ -39,11 +39,12 @@ const Education = () => {
       <body>
       <h1>Éducation</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <ul className="aboutme-list">
         {educations.map(education => (
-          <li key={education.ID}>
-            <h2>{education.Diplome} - {education.SchoolName}</h2> 
-            <p>Période: {education.StartDate} à {education.EndDate}</p>
+          <li key={education.ID} className="aboutme-block">
+            <h2>{education.Diplome}</h2> 
+            <p> {education.SchoolName} </p>
+            <p>Période : {education.StartDate} à {education.EndDate}</p>
           </li>
         ))}
       </ul>

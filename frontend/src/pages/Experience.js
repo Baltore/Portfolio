@@ -39,9 +39,9 @@ const Experience = () => {
       <body>
       <h1>Expérience</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <ul className="aboutme-list">
         {experiences.map(experience => (
-          <li key={experience.ID}>
+          <li key={experience.ID} className="aboutme-block">
             <h2>{experience.WorkName}</h2> 
             <p>Description: {experience.Description}</p>
             <p>Période: {experience.StartDate} à {experience.EndDate}</p>

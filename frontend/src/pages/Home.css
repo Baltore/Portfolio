@@ -57,7 +57,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background: linear-gradient(135deg, #0b1622, #320d3e);
+  background: linear-gradient(135deg, #8295a9, #2b75ae);
   background-size: cover;
   height: 100%;
   overflow: hidden;
@@ -68,7 +68,7 @@ body {
   margin: 40px auto; 
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); 
-  color: #ffffffbd;
+  color: #ffffff;
   font-size: 20px;
   line-height: 1.6; 
 }

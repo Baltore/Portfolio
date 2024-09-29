@@ -39,9 +39,9 @@ const Projet = () => {
       <body>
       <h1>Projets</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <ul className="aboutme-list">
       {projets.map(projet => (
-        <li key={projet.ID}>
+        <li key={projet.ID} className="aboutme-block">
           <h2>{projet.Name}</h2>
           <p>Description: {projet.Description}</p>
           <p>Tecnologie: {projet.Technologie}</p>

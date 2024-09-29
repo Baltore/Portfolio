@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import './AboutMe.css';
 
 const AboutMe = () => {
   const [aboutme, setAboutMe] = useState([]);
@@ -37,24 +38,25 @@ const AboutMe = () => {
         </nav>
       </header>
       <body>
-      <h1>AboutMe</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
-        {aboutme.map(aboutme => (
-        <li key={aboutme.ID} className="aboutme-block">
-          <h2>{aboutme.Prenom} {aboutme.Nom}</h2>
-          <p>{aboutme.Description}</p>
-          <p>Email: {aboutme.Email}</p>
-          <p>Phone: {aboutme.Telephone}</p>
-          {aboutme.Image && (
-            <img
-              src={`data:image/jpeg;base64,${Buffer.from(aboutme.Image).toString('base64')}`}
-              alt={`${aboutme.Prenom} ${aboutme.Nom}`}
-              className="aboutme-image"
-            />)}
-        </li>
-        ))}
-      </ul>
+          <h1>About Me</h1>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <ul className="aboutme-list">
+            {aboutme.map(aboutme => (
+              <li key={aboutme.ID} className="aboutme-block">
+                <h2>{aboutme.Prenom} {aboutme.Nom}</h2>
+                <p>{aboutme.Description}</p>
+                <p>Email: {aboutme.Email}</p>
+                <p>Phone: {aboutme.Telephone}</p>
+                {aboutme.Image && (
+                  <img
+                    src={`data:image/jpeg;base64,${Buffer.from(aboutme.Image).toString('base64')}`}
+                    alt={`${aboutme.Prenom} ${aboutme.Nom}`}
+                    className="aboutme-image"
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
       </body>
     </div>
     );

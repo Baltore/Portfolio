@@ -39,9 +39,9 @@ const Skill = () => {
       <body>
       <h1>Compétences</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <ul>
+      <ul className="aboutme-list">
         {skills.map(skill => (
-          <li key={skill.ID}>
+          <li key={skill.ID} className="aboutme-block">
             <h2>{skill.SkillName}</h2>
             <p>Niveau: {skill.LvlCompetence}</p>
           </li>
