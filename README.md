@@ -48,34 +48,34 @@ SQLite (bdd)
 
 ### Backend
 
-1. Clonez le dépôt :
+1. Clonez le dépôt : 
 
-git clone https://github.com/Baltore/Portfolio.git
-cd portfolio
+    git clone https://github.com/Baltore/Portfolio.git
+    cd portfolio
 
 2. Installez les dépendances :
 
-go mod tidy
+    go mod tidy
 
 3. Configurez la base de données dans le fichier config/db.go.
 
 4. Lancez le serveur backend :
 
-go run main.go
+    go run main.go
 
 ### Frontend
 
 1. Allez dans le dossier du frontend :
 
-cd frontend
+    cd frontend
 
 2. Installez les dépendances :
 
-npm install
+    npm install
 
 3. Lancez le serveur de développement :
 
-npm start
+    npm start
 
 ### Utilisation
 
