@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import AdminPage from './pages/AdminPage';
 import Skill from './pages/Skill';
 import AboutMe from './pages/AboutMe';
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/skills" element={<Skill />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

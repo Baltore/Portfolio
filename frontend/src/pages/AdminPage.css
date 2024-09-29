@@ -220,3 +220,13 @@ body {
 .add-button:hover {
   background-color: darkgreen;
 }
+
+.buttonDeco {
+  display: flex; /* Utilisation de flexbox */
+  justify-content: center; /* Centre le bouton horizontalement */
+  align-items: center; /* Centre le bouton verticalement */
+  position: absolute; /* Positionnement absolu */
+  bottom: 20px; /* Espacement du bas de la page */
+  left: 50%; /* Centre horizontalement */
+  transform: translateX(-50%); /* Ajuste pour le centrer */
+}

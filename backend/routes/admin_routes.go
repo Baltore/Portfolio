@@ -9,6 +9,9 @@ import (
 func AdminRoutes(router *gin.Engine) {
 	adminGroup := router.Group("/admin")
 	{
+		// Route pour la connexion
+		adminGroup.POST("/login", controllers.Login)
+
 		// Routes pour les Aboutme
 		adminGroup.GET("/aboutme", controllers.GetAboutMe)
 		adminGroup.POST("/aboutme", controllers.CreateAboutMe) // Route pour créer un AboutMe

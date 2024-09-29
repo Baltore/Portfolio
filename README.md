@@ -4,7 +4,7 @@ Membres du groupe : Qays, Matthis, Jemima, Ahmed, Khalidou
 
 ## Description
 
-Ce projet est un système de gestion de portfolio développé avec Go pour le backend, SQLite pour la base de données, et React/Vue.js pour le frontend. Il permet d'afficher et de modifier des informations personnelles et professionnelles telles que les projets, les contacts, l'éducation, les expériences et les compétences via une interface d'administration.
+Ce projet est un système de gestion de portfolio développé avec Go pour le backend, SQLite pour la base de données, et React pour le frontend. Il permet d'afficher et de modifier des informations personnelles et professionnelles telles que les projets, les contacts, l'éducation, les expériences et les compétences via une interface d'administration.
 
 Le site présente des informations sur une personne en particulier, visibles par défaut sur les différentes pages, et offre une interface d'administration où les données peuvent être modifiées. Toutes les modifications effectuées dans l'interface d'administration sont synchronisées avec la base de données.
 

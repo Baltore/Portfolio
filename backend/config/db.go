@@ -24,6 +24,7 @@ func Connect() {
 		&models.Projet{},
 		&models.Skill{},
 		&models.AboutMe{},
+		&models.Admin{},
 	)
 	if err != nil {
 		panic("Failed to migrate database!")

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Utilisation de useNavigate
 import './AdminPage.css';
 
 const AdminPage = () => {
   const [selectedPage, setSelectedPage] = useState('');
-  
+
   // Les données des différentes sections
   const [educationData, setEducationData] = useState([]);
   const [projetsData, setProjetsData] = useState([]);
@@ -13,10 +13,12 @@ const AdminPage = () => {
   const [skillsData, setSkillsData] = useState([]);
   const [contactsData, setContactsData] = useState([]);
   const [aboutmeData, setAboutMeData] = useState([]);
-  
+
   // Les données en cours de modification
   const [editData, setEditData] = useState(null);
   const [newData, setNewData] = useState({});
+
+  const navigate = useNavigate(); // Utilisation de useNavigate pour la navigation
 
   // Fonction de chargement des données
   const fetchData = async () => {
@@ -90,6 +92,11 @@ const AdminPage = () => {
   const handleInputChange = (field, value) => {
     setEditData({ ...editData, [field]: value });
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    navigate('/login'); // Redirige vers la page de connexion
+};
 
   const fieldLabels = {
     Prenom: 'Prénom',
@@ -236,7 +243,7 @@ const AdminPage = () => {
             <li><Link to="/projets">Projects</Link></li>
             <li><Link to="/experience">Experience</Link></li>
             <li><Link to="/skills">Skills</Link></li>
-            <li><Link to="/contacts">Contacts</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </nav>
         </header>
@@ -256,6 +263,7 @@ const AdminPage = () => {
         </div>
       <main>
         {renderSelectedSection()}
+        <button onClick={handleLogout} className="buttonDeco">Se déconnecter</button>
       </main>
     </div>
     </div>

@@ -41,3 +41,5 @@ export const getContacts = () => api.get('/admin/contacts');
 export const addContacts = (data) => api.post('/admin/contacts', data);
 export const updateContacts = (id, data) => api.put(`/admin/contacts/${id}`, data);
 export const deleteContacts = (id) => api.delete(`/admin/contacts/${id}`);
+
+export const addLogin = (data) => api.post('/admin/login', data);

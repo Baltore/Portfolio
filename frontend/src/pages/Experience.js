@@ -32,7 +32,7 @@ const Experience = () => {
             <li><Link to="/projets">Projet</Link></li>
             <li><Link to="/contact">Contact</Link></li>
             <li><Link to="/skills">Skills</Link></li>
-            <li><Link to="/admin">Admin</Link></li>
+            <li><Link to="/login">Admin</Link></li>
           </ul>
         </nav>
       </header>

@@ -6,7 +6,39 @@ import (
 	"project/models"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
+
+// Fonction de connexion
+func Login(c *gin.Context) {
+	var admin models.Admin
+
+	var input struct {
+		Username string `json:"username" binding:"required"`
+		Password string `json:"password" binding:"required"`
+	}
+
+	// Récupération des données du formulaire de connexion
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Username and password required"})
+		return
+	}
+
+	// Vérification des identifiants dans la base de données
+	if err := config.DB.Where("username = ?", input.Username).First(&admin).Error; err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	}
+
+	// Vérification du mot de passe (assurez-vous que admin.Password est haché)
+	if err := bcrypt.CompareHashAndPassword([]byte(admin.Password), []byte(input.Password)); err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		return
+	}
+
+	// Si les identifiants sont corrects, on retourne un succès
+	c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
+}
 
 // CRUD pour les Aboutme
 func GetAboutMe(c *gin.Context) {

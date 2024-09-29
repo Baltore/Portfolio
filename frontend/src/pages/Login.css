@@ -1,0 +1,61 @@
+
+  
+  .login-container {
+    width: 400px; /* Largeur du bloc */
+    height: 400px;
+    padding: 20px; /* Espacement interne */
+    margin: 100px auto; /* Centrer verticalement et horizontalement */
+    background-color: #152232; /* Couleur de fond du formulaire */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Ombre noire autour du bloc */
+    text-align: center; /* Centrer le texte à l'intérieur du bloc */
+  }
+  
+  h2 {
+    color: #ffffff; /* Couleur du titre */
+    margin-bottom: 40px; /* Espacement en dessous du titre */
+  }
+  
+  .input-group {
+    margin-bottom: 50px; /* Espacement entre les champs */
+  }
+  
+  label {
+    display: block; /* Affichage en bloc */
+    margin-bottom: 5px; /* Espacement en dessous des labels */
+    color: #ffffff; /* Couleur des labels */
+  }
+  
+  input {
+    width: 50%; /* Largeur complète */
+    padding: 10px; /* Espacement interne dans les champs */
+    border: 1px solid #ccc; /* Bordure légère */
+    border-radius: 5px; /* Coins arrondis pour les champs */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre interne légère */
+    transition: border 0.3s; /* Transition pour les effets */
+  }
+  
+  input:focus {
+    border-color: #007bff; /* Couleur de la bordure au focus */
+    outline: none; /* Enlever l'outline par défaut */
+  }
+  
+  .error-message {
+    color: red; /* Couleur des messages d'erreur */
+    margin-top: 10px; /* Espacement au-dessus du message d'erreur */
+  }
+  
+  button {
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: #ffffff; /* Couleur du texte du bouton */
+    padding: 10px 15px; /* Espacement interne du bouton */
+    border: none; /* Enlever la bordure par défaut */
+    border-radius: 5px; /* Coins arrondis pour le bouton */
+    cursor: pointer; /* Curseur pointer pour indiquer cliquable */
+    transition: background-color 0.3s; /* Transition pour l'effet hover */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Couleur au survol */
+  }
+  
